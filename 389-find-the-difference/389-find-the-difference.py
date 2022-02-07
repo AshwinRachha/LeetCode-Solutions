@@ -1,7 +1,7 @@
 class Solution:
     def findTheDifference(self, s: str, t: str) -> str:
-        c1 = Counter(s)
-        c2 = Counter(t)
+        c = Counter(s)
         for l in t:
-            if c1[l] != c2[l]:
+            if l not in c or c[l] == 0:
                 return l
+            c[l]-=1
