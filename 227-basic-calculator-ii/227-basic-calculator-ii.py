@@ -29,6 +29,5 @@ class Solution:
                     if s[i] == '-':
                         sign = -1
                     i+=1
-        print(stack)
         return sum(stack)
                     
