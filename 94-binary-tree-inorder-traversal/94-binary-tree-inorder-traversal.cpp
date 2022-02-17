@@ -1,21 +1,31 @@
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-class Solution:
-    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        ans = []
-        stack = [root]
-        while stack:
-            while root:
-                root = root.left
-                stack.append(root)
-            if stack:
-                root = stack.pop()
-                if root:
-                    ans.append(root.val)
-                    root = root.right
-                    stack.append(root)
-        return ans
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+   vector<int> v;
+    vector<int> inorderTraversal(TreeNode* root) {
+        stack<TreeNode*> s;
+        while(root||!s.empty()){
+            if(root!=NULL){
+                s.push(root);
+                root=root->left;
+            }
+            else{
+                root=s.top();
+                s.pop();
+                v.push_back(root->val);
+                root=root->right;
+            }
+          }
+         return v;
+    }
+};
