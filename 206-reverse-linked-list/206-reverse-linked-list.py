@@ -8,10 +8,7 @@ class Solution:
         
         if not head or not head.next:
             return head
-        curr, prev, nxt = head, None, None
-        while curr:
-            nxt = curr.next
-            curr.next = prev
-            prev = curr
-            curr = nxt
+        prev = self.reverseList(head.next)
+        head.next.next = head
+        head.next = None
         return prev
