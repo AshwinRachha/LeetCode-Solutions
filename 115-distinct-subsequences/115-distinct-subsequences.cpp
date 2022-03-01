@@ -1,18 +1,28 @@
-class Solution:
-    def numDistinct(self, s: str, t: str) -> int:
+class Solution {
+public:
+    int numDistinct(string s, string t) 
+    {
+        static int MOD = (int)1e9 + 7;
+        int n = s.size(); int m = t.size();
+        if(n == 0)
+            return 0;
         
-        m, n = len(s), len(t)
+        vector <vector <int>> dp(n+1, vector <int>(m+1, 0));
+        for(int i = 0; i < n; i++)
+        {
+            dp[i][0] = 1;
+        }
+        for(int i = 1; i <= n; i++)
+        {
+            for(int j = 1; j <= m; j++)
+            {
+                if(s[i-1] == t[j-1])
+                    dp[i][j] = (dp[i-1][j] + dp[i-1][j-1]) % MOD;
+                else
+                    dp[i][j] = dp[i-1][j];
+            }
+        }
         
-        @lru_cache(None)
-        def backtrack(i, j):
-            if j >= n:
-                return 1
-            if i >= m:
-                return 0
-            count = backtrack(i+1, j)
-            if s[i] == t[j]:
-                count += backtrack(i+1, j+1)
-            return count
-        
-        return backtrack(0, 0)
-        
+        return dp[n][m] % MOD;
+    }
+};
