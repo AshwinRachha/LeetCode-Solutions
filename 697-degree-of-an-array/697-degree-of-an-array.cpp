@@ -2,28 +2,28 @@ class Solution {
 public:
     int findShortestSubArray(vector<int>& nums) 
     {
-        unordered_map <int, vector<int>> map;
+        unordered_map <int, vector<int>> mp;
         
         for(int i = 0; i < nums.size(); i++)
         {
-            map[nums[i]].push_back(i);
+            mp[nums[i]].push_back(i);
         }
         
-        int count = 0;
-        for(auto it : map)
-        {
-            count = max({count, (int)it.second.size()});
-        }
-        int degree = nums.size();
+        int degree = 0;
         
-        for(auto it : map)
+        for(auto it : mp)
         {
-            if(it.second.size() == count)
+            degree = max(degree,(int)it.second.size());
+        }
+        int count = nums.size();
+        for(auto it : mp)
+        {
+            if(it.second.size() == degree)
             {
-                degree = min(degree, it.second[it.second.size()-1] - it.second[0] + 1);
+                count = min(count, it.second.back() - it.second[0] + 1);
             }
         }
+        return count;
         
-        return degree;
     }
 };
