@@ -4,7 +4,7 @@ class Solution:
         def to_int(string):
             result = 0
             for c in string:
-                result = 10*result + ( ord(c) - ord('1') + 1 )
+                result = 10*result + ( ord(c) - ord('0'))
             return result
         
         def to_string(integer):
