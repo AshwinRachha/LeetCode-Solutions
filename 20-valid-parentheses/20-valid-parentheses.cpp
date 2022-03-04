@@ -10,17 +10,12 @@ public:
         
         for(auto c : s)
         {
-            if(!st.empty())
+            if(!st.empty() && (c == ')' || c == ']' || c == '}'))
             {
-                if(c == ')' || c == ']' || c == '}')
-                {
-                    if(st.top() == mp[c])
+                  if(st.top() == mp[c])
                         st.pop();
                     else
                         return false;
-                }
-                else
-                    st.push(c);
             }
             else
                 st.push(c);
