@@ -1,20 +1,14 @@
 class Solution:
     def numDistinct(self, s: str, t: str) -> int:
         
-        m, n = len(s), len(t)
-        
-        @lru_cache(None)
-        def backtrack(i, j):
-            if j >= n:
-                return 1
-            if i >= m:
-                return 0
-            count = 0
-            if s[i] == t[j]:
-                count += backtrack(i+1, j+1) +  backtrack(i+1, j) 
-            else:
-                count = backtrack(i+1, j)
-            return count
-        
-        return backtrack(0, 0)
-        
+        n, m = len(s), len(t)
+        dp = [[0 for _ in range(m+1)] for _ in range(n+1)]
+        for i in range(n+1):
+            dp[i][0] = 1
+        for i in range(1, n+1):
+            for j in range(1, m+1):
+                if s[i-1] == t[j-1]:
+                    dp[i][j] = dp[i-1][j] + dp[i-1][j-1]
+                else:
+                    dp[i][j] = dp[i-1][j]
+        return dp[n][m]
