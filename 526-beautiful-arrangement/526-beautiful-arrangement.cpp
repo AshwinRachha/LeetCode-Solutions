@@ -1,9 +1,9 @@
 class Solution {
 public:
-    
     int count = 0;
     set <int> st;
-    void backtrack(int index,int n)
+    
+    void backtrack(int index, int n)
     {
         if(index > n)
         {
@@ -15,16 +15,15 @@ public:
             if(st.find(i) == st.end() && (i % index == 0 || index % i == 0))
             {
                 st.insert(i);
-                backtrack(index + 1, n);
+                backtrack(index+1, n);
                 st.erase(i);
             }
         }
-        
     }
     
     int countArrangement(int n) 
     {
-        backtrack(1, n);
+       backtrack(1, n);
         return count;
     }
     
