@@ -6,9 +6,10 @@ public:
         dp[0] = 1;
         for(auto coin : coins)
         {
-            for(int x = coin; x < amount + 1; x++)
+            for(int i = 1; i < amount + 1; i++)
             {
-                dp[x] += dp[x - coin];
+                if(i>=coin)
+                    dp[i] += dp[i - coin];
             }
         }
         
