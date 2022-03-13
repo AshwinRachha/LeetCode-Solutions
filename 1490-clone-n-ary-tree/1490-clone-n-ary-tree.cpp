@@ -22,23 +22,23 @@ class Solution {
 public:
     Node* cloneTree(Node* root) 
     {
-        if(root == NULL)
-            return NULL;
-        deque <Node*> que;
-        unordered_map <Node*, Node*> mp;
-        mp[root] = new Node(root->val);
-        que.push_back(root);
-        while(!que.empty())
+        if(root == nullptr)
+            return root;
+        unordered_map <Node*, Node*> copy;
+        deque <Node*> q;
+        q.push_back(root);
+        copy[root] = new Node(root->val);
+        while(!q.empty())
         {
-            Node* node = que.front(); que.pop_front();
+            Node* node = q.front(); q.pop_front();
             for(auto child : node->children)
             {
-                mp[child] = new Node(child->val);
-                que.push_back(child);
-                mp[node]->children.push_back(mp[child]);
+                copy[child] = new Node(child->val);
+                copy[node]->children.push_back(copy[child]);
+                q.push_back(child);
             }
         }
         
-        return mp[root];
+        return copy[root];
     }
 };
