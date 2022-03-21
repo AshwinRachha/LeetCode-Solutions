@@ -2,22 +2,22 @@ class Solution {
 public:
     int triangleNumber(vector<int>& nums) 
     {
-        int count = 0;
         sort(nums.begin(), nums.end());
+        int ans = 0;
         for(int k = 2; k < nums.size(); k++)
         {
             int i = 0; int j = k - 1;
-            while( i < j)
+            while(i < j)
             {
                 if(nums[i] + nums[j] > nums[k])
-            {
-                count += j - i;
-                j -= 1;
-            }
-            else
-                i+=1;
+                {
+                    ans += j - i;
+                    j-=1;
+                }
+                else
+                    i++;
             }
         }
-        return count;
+        return ans;
     }
 };
