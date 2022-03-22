@@ -4,15 +4,16 @@ public:
     {
         stack <int> st;
         int index = 0;
-        for(int num : pushed)
+        for(int c : pushed)
         {
-            st.push(num);
-            while(!st.empty() && index < popped.size() && popped[index] == st.top())
+            st.push(c);
+            while(index < popped.size() && !st.empty() && st.top() == popped[index])
             {
                 st.pop();
                 index++;
             }
         }
+        
         return st.empty();
     }
 };
