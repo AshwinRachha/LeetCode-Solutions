@@ -3,12 +3,15 @@ public:
     int minProductSum(vector<int>& nums1, vector<int>& nums2) 
     {
         sort(nums1.begin(), nums1.end());
-        sort(nums2.begin(), nums2.end(), greater <int>());
-        int product = 0;
-        for(int i = 0; i < nums2.size(); i++)
+        priority_queue <int, vector <int>> pq;
+        for(int num : nums2)
+            pq.push(num);
+        int ans = 0;
+        for(int idx = 0; idx < nums2.size(); idx++)
         {
-            product += nums1[i] * nums2[i]; 
+            ans += nums1[idx] * pq.top();
+            pq.pop();
         }
-        return product;
+        return ans;
     }
 };
