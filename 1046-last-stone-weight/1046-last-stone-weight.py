@@ -11,5 +11,4 @@ class Solution:
                 continue
             else:
                 heapq.heappush(stones, -1 * abs(stone1 - stone2))
-            print(stones)
         return -1 * stones[0] if stones else 0
