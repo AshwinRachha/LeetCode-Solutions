@@ -1,39 +1,33 @@
 class Solution {
 public:
-    int calPoints(vector<string>& ops)
+    int calPoints(vector<string>& ops) 
     {
-        int value1;
-        int value2;
+        stack <int> st;
         int ans = 0;
-        stack<int>stk;
-        
-        for(string i:ops)
+        for(auto c : ops)
         {
-            if(i == "C")
+            if(c == "+")
             {
-                stk.pop();
+                int num1 = st.top(); st.pop();
+                int num2 = st.top();
+                st.push(num1);
+                st.push(num1 + num2);
             }
-            else if(i == "D")
+            else if(c == "C")
             {
-                stk.push(stk.top()*2);
+                st.pop();
             }
-            else if(i == "+")
+            else if(c == "D")
             {
-                value1 = stk.top();
-                stk.pop();
-                value2 = stk.top();
-                stk.push(value1);
-                stk.push(value1 + value2);
+                st.push(st.top() * 2);
             }
             else
             {
-                stk.push(stoi(i)); //stoi() to convert string into integer 
+                st.push(stoi(c));
             }
         }
-        while(stk.size() != 0)
-        {
-            ans += stk.top();
-            stk.pop();
-        }
+        while(!st.empty())
+            {ans += st.top(); st.pop();}
         return ans;
-    }};
+    }
+};
