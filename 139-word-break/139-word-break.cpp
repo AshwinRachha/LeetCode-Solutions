@@ -18,9 +18,11 @@ public:
         for (int end = start + 1; end <= s.length(); end++) {
             if (word_set.find(s.substr(start, end - start)) != word_set.end() and
                 wordBreakMemo(s, word_set, end, memo)) {
-                return memo[start] = true;
+                memo[start] = true;
+                return memo[start];
             }
         }
-        return memo[start] = false;
+        memo[start] = false;
+        return memo[start];
     }
 };
