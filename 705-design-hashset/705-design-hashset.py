@@ -1,6 +1,6 @@
 class MyHashSet:
     def __init__(self):
-        self.hash_value = 1000
+        self.hash_value = 10000
         self.hash_table = [Bucket() for i in range(self.hash_value)]
         
     def add(self, key: int) -> None:
