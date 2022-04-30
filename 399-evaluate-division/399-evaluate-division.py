@@ -7,8 +7,6 @@ class Solution:
             graph[equation[0]][equation[1]]  = values[i]
             graph[equation[1]][equation[0]]  = 1 / values[i]
         
-        print(graph)
-        
         def dfs(x, y, visited):
             
             if x not in graph or y not in graph: return -1
