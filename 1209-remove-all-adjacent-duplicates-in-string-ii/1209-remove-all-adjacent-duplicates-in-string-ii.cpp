@@ -1,17 +1,29 @@
-class Solution:
-    def removeDuplicates(self, s: str, k: int) -> str:
+class Solution {
+public:
+    string removeDuplicates(string s, int k) {
+        int n = s.size();
+        if(n<k) return s;
         
-        # Stack of tuples -> (letter, count of occurence)
-        stack = []
-        n, i = len(s), 0
-        while i < n:
-            if not stack or s[i] != stack[-1][-1]:
-                stack.append(s[i])
-            else:
-                stack[-1] += s[i]
-                if len(stack[-1]) == k:
-                    stack.pop()
-            i+=1
-            
-        return "".join(stack)
+        stack<pair<char,int>> stk;
+        for(int i=0; i<n; ++i){
+            if(stk.empty() || stk.top().first != s[i]) stk.push({s[i],1});
+            else{
+                auto prev = stk.top();
+                stk.pop();
+                stk.push({s[i], prev.second+1});
+            }
+            if(stk.top().second==k) stk.pop();
+        }
         
+        string ans = "";
+        while(!stk.empty()){
+            auto cur = stk.top();
+            stk.pop();
+            while(cur.second--){
+                ans.push_back(cur.first);
+            }
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+};
