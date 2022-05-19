@@ -14,7 +14,6 @@ class Solution:
             nonlocal s, h;
             if root:
                 if not root.left and not root.right:
-                    print(s)
                     if curr_height > h:
                         s = root.val
                         h = curr_height
