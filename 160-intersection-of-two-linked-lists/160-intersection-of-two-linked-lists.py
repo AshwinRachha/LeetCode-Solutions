@@ -5,23 +5,16 @@
 #         self.next = None
 
 class Solution:
-    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
         
-        if not headA and not headB:
-            return None
-        first = headA; second = headB
-        while first!=second and first and second:
-            first = first.next
-            second = second.next
-            if first == second:
-                return first
-            if not first:
-                first = headB
-            if not second:
-                second = headA
-
-        return first
-            
+        tempA, tempB = headA, headB
         
-        
+        while tempA or tempB:
+            tempA = headB if tempA == None else tempA
+            tempB = headA if tempB == None else tempB
+            if tempA == tempB:
+                return tempA
+            tempA = tempA.next
+            tempB = tempB.next
+        return None
         
