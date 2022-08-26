@@ -7,9 +7,6 @@ class Solution:
             graph[v[0]].append(v[1])
             graph[v[1]].append(v[0])
         
-        lst = []
-        ans = 0
-        
         visited = set()
         
         def dfs(node):
