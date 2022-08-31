@@ -1,21 +1,20 @@
 class Solution:
     def numDistinctIslands(self, grid: List[List[int]]) -> int:
-
-        # Do a DFS to find all cells in the current island.
-        def dfs(row, col, direction):
-            if row < 0 or col < 0 or row >= len(grid) or col >= len(grid[0]):
+        
+        rows, cols = len(grid), len(grid[0])
+        def dfs(r, c, direction):
+            if r < 0 or r >= rows or c < 0 or c >= cols or grid[r][c] == 0:
+                return 
+            if (r, c) in seen:
                 return
-            if (row, col) in seen or not grid[row][col]:
-                return
-            seen.add((row, col))
+            seen.add((r,c))
             path_signature.append(direction)
-            dfs(row + 1, col, "D")
-            dfs(row - 1, col, "U")
-            dfs(row, col + 1, "R")
-            dfs(row, col - 1, "L")
+            dfs(r + 1, c, "D")
+            dfs(r - 1, c, "U")
+            dfs(r, c - 1, "L")
+            dfs(r, c + 1, "R")
             path_signature.append("0")
         
-        # Repeatedly start DFS's as long as there are islands remaining.
         seen = set()
         unique_islands = set()
         for row in range(len(grid)):
