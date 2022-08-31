@@ -2,7 +2,6 @@ class Solution:
     def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
         
         pacific, atlantic = set(), set()
-        Q = deque()
         rows, cols = len(heights), len(heights[0])
         
         def dfs(r, c, elevation, visit):
