@@ -1,33 +1,40 @@
-class Solution:
-    def threeSum(self, nums: List[int]) -> List[List[int]]:
-        
-        nums.sort()
-        n = len(nums)
-        i = 0
-        ans = []
-        while i < len(nums) - 2:
-            j, k = i + 1, n - 1
-            while j < k:
-                s = nums[i] + nums[j] + nums[k]
-                if s == 0:
-                    ans.append([nums[i], nums[j], nums[k]])
-                    j += 1
-                    while j < k and nums[j] == nums[j-1]:
-                        j += 1
-                    k-=1
-                    while j < k and nums[k] == nums[k + 1]:
-                        k-= 1
-                elif s < 0:
-                    j += 1
-                    while j < k and nums[j] == nums[j-1]:
-                        j += 1
-                else:
-                    k-=1
-                    while j < k and nums[k] == nums[k + 1]:
-                        k-= 1
-            i += 1
-            while i < len(nums) - 2 and nums[i] == nums[i-1]:
-                i += 1
-                
-        return ans
-        
+func threeSum(nums []int) [][]int {
+	var res [][]int
+
+	if len(nums) < 3 {
+		return res
+	}
+
+	sort.Ints(nums)
+
+	for i := 0; i < len(nums)-2; i++ {
+		if i > 0 && nums[i] == nums[i-1] {
+			continue
+		}
+
+		left, right := i+1, len(nums)-1
+
+		for left < right {
+			target := nums[i] + nums[left] + nums[right]
+
+			if target == 0 {
+				res = append(res, []int{nums[i], nums[left], nums[right]})
+				left, right = left+1, right-1
+
+				for left < right && nums[left] == nums[left-1] {
+					left++
+				}
+
+				for left < right && nums[right] == nums[right+1] {
+					right--
+				}
+			} else if target > 0 {
+				right--
+			} else {
+				left++
+			}
+		}
+	}
+
+	return res
+}
