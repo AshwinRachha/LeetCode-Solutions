@@ -1,24 +1,24 @@
 func trap(height []int) int {
     
-    left, right := 0, len(height) - 1
+    left, right := 0, len(height)-1
     leftMax, rightMax := 0, 0
-    var res int
+    res := 0
     
     for left <= right {
         if leftMax < rightMax {
-            if height[left] <= leftMax {
-                res += leftMax - height[left]
-            } else {
+            if leftMax <= height[left] {
                 leftMax = height[left]
-            }
-            left += 1
-        } else {
-            if height[right] <= rightMax {
-                res += rightMax - height[right]
             } else {
-               rightMax = height[right] 
+                res += leftMax - height[left]
             }
-            right -= 1
+            left++
+        } else {
+            if rightMax <= height[right] {
+                rightMax = height[right]
+            } else {
+                res += rightMax - height[right]
+            }
+            right--
         }
     }
     
