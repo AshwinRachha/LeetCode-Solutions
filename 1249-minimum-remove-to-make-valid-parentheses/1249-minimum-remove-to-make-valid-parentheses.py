@@ -12,5 +12,7 @@ class Solution:
                 else:
                     s[i] = ''
         for i in stack:
-            s[i] = ""
-        return ''.join(s)
+            s[i] = ''
+        return "".join(s)
+        
+        
