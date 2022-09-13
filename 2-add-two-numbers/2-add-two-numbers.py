@@ -6,27 +6,22 @@
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         
-        dummy = head = ListNode(-1)
+        def recursion(root):
+            if not root.next:
+                return root.val
+            return recursion(root.next) * 10 + root.val
         
-        c = 0
+        def int_to_linked_list(num: int):
+            root = ListNode(num % 10)
+            p = root
+            num = num // 10
+            while num > 0:
+                p.next = ListNode(num % 10)
+                num = num // 10
+                p = p.next
+            return root
+            
+        num1 = recursion(l1)
+        num2 = recursion(l2)
         
-        while l1 or l2:
-            
-            val1 = l1.val if l1 else 0
-            val2 = l2.val if l2 else 0
-            
-            c, s = divmod((val1 + val2 + c),10)
-            
-            node = ListNode(s)
-            
-            head.next = node
-            head = head.next
-            
-            l1 = l1.next if l1 else None
-            l2 = l2.next if l2 else None
-        
-        if c:
-            node = ListNode(1)
-            head.next = node
-            
-        return dummy.next
+        return int_to_linked_list(num1 + num2)
