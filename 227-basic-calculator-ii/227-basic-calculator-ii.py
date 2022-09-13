@@ -30,4 +30,4 @@ class Solution:
                         sign = -1
                     i+=1
         return sum(stack)
-                    
+        
