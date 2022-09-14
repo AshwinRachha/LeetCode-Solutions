@@ -7,23 +7,29 @@
 
 class Solution:
     def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:
-        def dfs(node, par = None):
+        
+        def dfs(node, par):
             if node:
                 node.par = par
                 dfs(node.left, node)
                 dfs(node.right, node)
-
-        dfs(root)
+        dfs(root, None)
         
-        q = deque([(target, 0)])
-        seen = {target}
-        while q:
-            if q[0][1] == k:
-                return [node.val for node, d in q]
-            node, d = q.popleft()
+        queue = deque([(target, 0)])
+        
+        seen = set()
+        seen.add(target)
+        
+        ans = []
+        
+        while queue:
+            
+            node, distance = queue.popleft()
+            if distance == k:
+                ans.append(node.val)
             for nei in (node.left, node.right, node.par):
                 if nei and nei not in seen:
                     seen.add(nei)
-                    q.append((nei,d+1))
-                    
-        return []
+                    queue.append((nei, distance + 1))
+        
+        return ans
