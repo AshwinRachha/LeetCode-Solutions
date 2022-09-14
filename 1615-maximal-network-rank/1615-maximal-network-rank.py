@@ -9,5 +9,8 @@ class Solution:
         max_network = float('-inf')
         for i in range(n):
             for j in range(i+1, n):
-                max_network = max(max_network, len(graph[i]) + len(graph[j]) - (i in graph[j]))
+                if i in graph[j] or j in graph[j]:
+                    max_network = max(max_network, len(graph[i]) + len(graph[j])-1)
+                else:
+                    max_network = max(max_network, len(graph[i]) + len(graph[j]))
         return max_network
