@@ -1,22 +1,23 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        prereqs = defaultdict(list)
-        for course, prereq in prerequisites:
-            prereqs[course].append(prereq)
-        seen = set()
+        
+        graph = defaultdict(list)
+        for crs, pre in prerequisites:
+            graph[crs].append(pre)
+        visit = set()
         def dfs(course):
-            if course in seen:
+            if course in visit:
                 return False
-            if prereqs[course] == []:
+            if graph[course] == []:
                 return True
-            seen.add(course)
-            for c in prereqs[course]:
-                if not dfs(c):
+            visit.add(course)
+            for pre in graph[course]:
+                if not dfs(pre):
                     return False
-            seen.remove(course)
-            prereqs[course] = []
+            visit.remove(course)
+            graph[course] = []
             return True
-
-        for course in range(numCourses):
-            if not dfs(course): return False
+        for i in range(numCourses):
+            if not dfs(i):
+                return False
         return True
