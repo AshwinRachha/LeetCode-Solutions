@@ -1,21 +1,28 @@
+import heapq
 class Leaderboard:
 
     def __init__(self):
         
-        self.leaderboard = Counter()
-
+        self.leaderboard = defaultdict(int)
+        
     def addScore(self, playerId: int, score: int) -> None:
         
         self.leaderboard[playerId] += score
 
     def top(self, K: int) -> int:
+        heap = []
+        res = 0
+        for num in self.leaderboard.values():
+            heapq.heappush(heap, num)
+            if len(heap) > K:
+                heapq.heappop(heap)
+        while heap:
+            res += heapq.heappop(heap)
+        return res
         
-        return sum( l[1] for l in self.leaderboard.most_common(K))
-    
+
     def reset(self, playerId: int) -> None:
         self.leaderboard[playerId] = 0
-
-
 # Your Leaderboard object will be instantiated and called as such:
 # obj = Leaderboard()
 # obj.addScore(playerId,score)
