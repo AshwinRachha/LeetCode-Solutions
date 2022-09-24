@@ -2,10 +2,11 @@ class Solution:
     def minProductSum(self, nums1: List[int], nums2: List[int]) -> int:
         
         nums1.sort()
-        nums2.sort(reverse = True)
-        
+        arr = [-num for num in nums2]
+        heapq.heapify(arr)
         ans = 0
-        for num1, num2 in zip(nums1, nums2):
-            ans += num1 * num2
+        
+        for i in range(len(nums1)):
+            ans += nums1[i] * -1 * heapq.heappop(arr)
         return ans
         
