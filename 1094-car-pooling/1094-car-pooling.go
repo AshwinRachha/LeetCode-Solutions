@@ -1,17 +1,18 @@
-class Solution:
-    def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
-        
-        timestamp = []
-        for trip in trips:
-            timestamp.append([trip[1], trip[0]])
-            timestamp.append([trip[2], -trip[0]])
-        #print(timestamp)
-        timestamp.sort()
-        #print(timestamp)
-        used_cap = 0
-        for time, passanger_change in timestamp:
-            used_cap += passanger_change
-            if used_cap > capacity:
-                return False
-        return True
-                
+import "fmt"
+func carPooling(trips [][]int, capacity int) bool {
+    
+    arr := make([]int, 1001)
+    for i := range(trips) {
+        passangers, start, end := trips[i][0], trips[i][1], trips[i][2]
+        arr[start] += passangers
+        arr[end] -= passangers
+    }
+    used_cap := 0
+    for i := 0; i < 1001; i++ {
+        used_cap += arr[i]
+        if used_cap > capacity {
+            return false
+        }
+    }
+    return true
+}
