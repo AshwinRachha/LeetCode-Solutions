@@ -6,7 +6,7 @@ class Solution:
         for end, c in enumerate(s):
             if c in dic:
                 start = max(start, dic[c])
-            max_len = max(max_len, end - start+1)
+            max_len = max(max_len, end - start + 1)
             dic[c] = end + 1
         
         return max_len
