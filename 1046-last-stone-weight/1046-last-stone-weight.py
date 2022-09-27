@@ -9,5 +9,4 @@ class Solution:
                 continue
             stone1 -= stone2
             heapq.heappush(stones, -1 * stone1)
-        print(stones)
         return -1 * stones[0] if len(stones) == 1 else 0
