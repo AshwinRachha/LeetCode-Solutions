@@ -1,19 +1,19 @@
 class Solution:
     def areSentencesSimilar(self, sentence1: List[str], sentence2: List[str], similarPairs: List[List[str]]) -> bool:
-        if len(sentence1) != len(sentence2):
+        n, m = len(sentence1), len(sentence2)
+        if n!=m:
             return False
-        n = len(sentence1)
-        graph = defaultdict(set)
-        for word1, word2 in similarPairs:
-            if word2 not in graph[word1]: graph[word1].add(word2)
-            if word1 not in graph[word2]:  graph[word2].add(word1)
-            
-        for i in range(n):
-            if sentence1[i] == sentence2[i]:
+        dic = defaultdict(set)
+        for s1, s2 in similarPairs:
+            dic[s1].add(s2)
+            dic[s2].add(s1)
+        for s1, s2 in zip(sentence1, sentence2):
+            if s1 == s2:
                 continue
-            elif sentence1[i] in graph[sentence2[i]]:
-                continue
+            if s1 in dic[s2]:
+                    continue
             else:
                 return False
         return True
             
+        
