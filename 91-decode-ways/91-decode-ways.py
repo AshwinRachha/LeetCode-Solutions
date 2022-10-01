@@ -1,19 +1,18 @@
 class Solution:
     def numDecodings(self, s: str) -> int:
-        
+        n = len(s)
         @lru_cache(maxsize = None)
-        def dfs(s, index):
-            if index == len(s):
+        def backtrack(index):
+            if index == n:
                 return 1
             if s[index] == '0':
                 return 0
-            if index == len(s)-1:
+            if index == n - 1:
                 return 1
-            ans = dfs(s, index + 1)
+            answer = backtrack(index + 1)
             if int(s[index : index + 2]) <= 26:
-                ans += dfs(s, index + 2)
-            
-            return ans
+                answer += backtrack(index + 2,)
+            return answer
         
-        return dfs(s, 0)
+        return backtrack(0)
             
