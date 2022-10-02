@@ -1,11 +1,10 @@
 class Solution:
     def minimumHealth(self, damage: List[int], armor: int) -> int:
         
-        maximum, health = float('-inf'), 1
-        for i, n in enumerate(damage):
-            health += n
-            maximum = max(maximum, n)
-        to_sub = min(maximum , armor)
-        health -= to_sub
+        health = 1
+        maximum = float('-inf')
+        for num in damage:
+            health += num
+            maximum = max(maximum, num)
+        health -= min(armor, maximum)
         return health
-        
