@@ -7,18 +7,14 @@
 class Solution:
     def sumRootToLeaf(self, root: Optional[TreeNode]) -> int:
         self.sum = 0
-        def dfs(root, bin_string):
+        def dfs(root, curr_number):
             if not root:
                 return
             else:
-                bin_string.append(str(root.val))
+                curr_number = (curr_number << 1) | root.val
                 if not root.left and not root.right:
-                     self.sum += int("".join(bin_string), 2)
-                if root.left:
-                    dfs(root.left, bin_string)
-                if root.right:
-                    dfs(root.right, bin_string)
-                bin_string.pop()
-                    
-        dfs(root, [])
+                     self.sum += curr_number
+                dfs(root.left, curr_number)
+                dfs(root.right, curr_number)            
+        dfs(root, 0)
         return self.sum
