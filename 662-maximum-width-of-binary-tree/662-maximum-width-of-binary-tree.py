@@ -8,7 +8,7 @@ class Solution:
     def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         
         queue = deque([(root, 0)])
-        max_dist = float('-inf')
+        max_dist = 0
         while queue:
             size = len(queue)
             _, level_head = queue[0]
@@ -19,6 +19,6 @@ class Solution:
                 if node.right:
                     queue.append([node.right, 2*index + 1])
             max_dist = max(max_dist, index - level_head + 1)
-        return max_dist if max_dist != float('-inf') else 0
+        return max_dist 
             
             
