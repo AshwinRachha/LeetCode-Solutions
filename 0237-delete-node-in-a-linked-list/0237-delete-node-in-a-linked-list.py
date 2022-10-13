@@ -14,7 +14,7 @@ class Solution:
         curr = node
         prev = None
         while curr.next:
-            nxt = curr.next.val if curr.next else 0
+            nxt = curr.next.val 
             curr.val = nxt
             prev = curr
             curr = curr.next
