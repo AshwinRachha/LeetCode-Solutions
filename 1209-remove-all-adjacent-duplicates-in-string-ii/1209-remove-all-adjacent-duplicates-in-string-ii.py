@@ -1,17 +1,20 @@
 class Solution:
     def removeDuplicates(self, s: str, k: int) -> str:
         
-        # Stack of tuples -> (letter, count of occurence)
         stack = []
-        n, i = len(s), 0
-        while i < n:
-            if not stack or s[i] != stack[-1][-1]:
-                stack.append(s[i])
-            else:
-                stack[-1] += s[i]
-                if len(stack[-1]) == k:
-                    stack.pop()
-            i+=1
+        s = list(s)
+        
+        for c in s:
             
-        return "".join(stack)
+            if not stack:
+                stack.append([c, 1])
+            else:
+                if c == stack[-1][0]:
+                    if stack[-1][1] == k-1:
+                        stack.pop()
+                    else:
+                        stack[-1][1] += 1
+                else:
+                    stack.append([c, 1])
+        return "".join([c*count for c, count in stack])
         
