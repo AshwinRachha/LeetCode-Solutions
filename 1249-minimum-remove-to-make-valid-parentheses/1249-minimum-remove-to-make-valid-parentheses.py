@@ -3,16 +3,16 @@ class Solution:
         
         stack = []
         s = list(s)
-        for i in range(len(s)):
-            if s[i] == '(':
+        for i, c in enumerate(s):
+            if c == '(':
                 stack.append(i)
-            elif s[i] == ')':
+            elif c == ')':
                 if stack:
                     stack.pop()
                 else:
-                    s[i] = ''
+                    s[i] = ""
         for i in stack:
-            s[i] = ''
+            s[i] = ""
         return "".join(s)
         
         
