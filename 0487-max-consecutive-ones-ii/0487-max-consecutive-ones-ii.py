@@ -19,19 +19,15 @@ class Solution:
         maximum = 0
         left, right = 0, 0
         k = 0
-
-        while right < len(nums):  
-            if nums[right] == 0:    
+        n = len(nums)
+        for right in range(n):
+            if nums[right] == 0:
                 k += 1
-
-            while k == 2:   
-                if nums[left] == 0:    
-                    k -= 1
-                left += 1
-
-            maximum = max(maximum, right - left + 1)   
-            right += 1   
-
+                while k == 2:
+                    if nums[left] == 0:
+                        k -= 1
+                    left += 1
+            
+            maximum = max(maximum, right - left + 1)
         return maximum
-        
         
