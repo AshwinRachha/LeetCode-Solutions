@@ -11,6 +11,5 @@ class Solution:
                 count += 1
             node = queue.popleft()
             count = 1
-            print(node)
         return queue[0]
             
