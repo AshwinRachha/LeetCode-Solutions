@@ -15,7 +15,6 @@ class Solution:
             for j in range(n):
                 frequencies[mat[i][j]] += 1
         for k, v in frequencies.items():
-            print(v, n)
             if v == m:
                 return k
         return -1
